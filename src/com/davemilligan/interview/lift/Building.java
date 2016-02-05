@@ -1,4 +1,4 @@
-package com.davemilligan.interview;
+package com.davemilligan.interview.lift;
 
 public class Building {
 	private final int numFloors;

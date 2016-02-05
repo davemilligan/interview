@@ -1,4 +1,4 @@
-package com.davemilligan.interview;
+package com.davemilligan.interview.lift;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.davemilligan.interview;
+package com.davemilligan.interview.lift;
 
 public enum Direction {
 	DESCENDING("DOWN"), ASCENDING("UP");

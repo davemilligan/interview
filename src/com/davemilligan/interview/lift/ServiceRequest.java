@@ -1,4 +1,4 @@
-package com.davemilligan.interview;
+package com.davemilligan.interview.lift;
 
 /**
  * This class will store a service request
