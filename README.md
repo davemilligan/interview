@@ -1,0 +1,1 @@
+Various coding challenges completed in job interviewing. 
