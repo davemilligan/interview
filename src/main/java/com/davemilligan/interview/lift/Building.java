@@ -1,6 +1,6 @@
 package com.davemilligan.interview.lift;
 
-public class Building {
+public class git addBuilding {
 	private final int numFloors;
 	private final int numLifts;
 
