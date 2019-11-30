@@ -11,6 +11,7 @@ public class LeftRotation {
     static int d = 4;
     public static void main(String[] args) {
 
+        //using just array
 //        while (d > 0) {
 //            int i = 0;
 //            int tmp = a[i];
