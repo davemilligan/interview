@@ -1,4 +1,4 @@
-package com.davemilligan.interview.arrays;
+package com.davemilligan.interview.hackerrank.arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;

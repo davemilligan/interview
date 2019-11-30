@@ -1,11 +1,9 @@
-package com.davemilligan.interview.arrays;
+package com.davemilligan.interview.hackerrank.arrays;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
