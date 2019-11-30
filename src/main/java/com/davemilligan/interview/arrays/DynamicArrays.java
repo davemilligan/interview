@@ -1,4 +1,4 @@
-package arrays;
+package com.davemilligan.interview.arrays;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

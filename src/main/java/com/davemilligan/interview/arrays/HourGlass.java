@@ -1,4 +1,4 @@
-package arrays;
+package com.davemilligan.interview.arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
