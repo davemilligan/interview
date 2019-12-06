@@ -1,4 +1,4 @@
-package com.davemilligan.interview.sales;
+package com.davemilligan.interview.trading;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
