@@ -72,7 +72,7 @@ public class Passes {
      */
     public static long enhancedLoopWaitingTime(List<Integer> ticketQueue, int myPositionInQueue) {
         int pNeeded = ticketQueue.get(myPositionInQueue);
-        long wait = pNeeded;
+        long wait = 0;
         int idx = 0;
         for(Integer currentCustomer: ticketQueue) {
             wait += Math.min(currentCustomer, (idx++ <= myPositionInQueue) ? pNeeded : pNeeded -1);
