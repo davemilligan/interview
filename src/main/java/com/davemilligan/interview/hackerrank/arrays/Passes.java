@@ -53,14 +53,10 @@ public class Passes {
      */
     public static long forLoopWaitingTime(List<Integer> ticketQueue, int myPositionInQueue) {
         int pNeeded = ticketQueue.get(myPositionInQueue);
-        long wait = pNeeded;
+        long wait = 0;
         for(int i = 0; i < ticketQueue.size(); i++) {
             int currentCustomer = ticketQueue.get(i);
-            if (i < myPositionInQueue) {
-                wait += (pNeeded > currentCustomer) ? currentCustomer : pNeeded;
-            } else if (i > myPositionInQueue) {
-                wait += (pNeeded-1 > currentCustomer) ? currentCustomer : pNeeded-1;
-            }
+            wait += Math.min(currentCustomer, (i <= myPositionInQueue) ? pNeeded : pNeeded -1);
         }
         return wait;
     }
