@@ -24,16 +24,13 @@ public class Trading {
             salesPerProduct.put(s.pid, currentTotal + s.volume);
         });
 
-        final List<Integer> pids = new ArrayList<>();
+        final List<Product> products = new ArrayList<>();
         salesPerProduct.keySet().stream().forEach(pid -> {
-            if (salesPerProduct.get(pid) > 200) {
-                pids.add(pid);
+            if (salesPerProduct.get(pid) > boundary) {
+                products.add(getProduct(pid));
             }
         });
-        return pids
-                .stream()
-                .map(pid -> getProduct(pid))
-                .collect(Collectors.toList());
+        return products;
     }
 
     public static int getTotalsBetweenDates(
