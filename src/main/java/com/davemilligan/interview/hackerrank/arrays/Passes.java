@@ -75,12 +75,7 @@ public class Passes {
         long wait = pNeeded;
         int idx = 0;
         for(Integer currentCustomer: ticketQueue) {
-            if (idx < myPositionInQueue) {
-                wait += (pNeeded > currentCustomer) ? currentCustomer : pNeeded;
-            } else if (idx > myPositionInQueue) {
-                wait += (pNeeded-1 > currentCustomer) ? currentCustomer : pNeeded-1;
-            }
-            idx++;
+            wait += Math.min(currentCustomer, (idx++ <= myPositionInQueue) ? pNeeded : pNeeded -1);
         }
         return wait;
     }
@@ -121,13 +116,11 @@ public class Passes {
             else
                 myPositionInQueue -=1;
             int ticketsNeeded = list.poll();
-            if (ticketsNeeded > 0)
+            if (ticketsNeeded > 0) {
                 list.offer(ticketsNeeded - 1);
-            else
-                list.offer(ticketsNeeded);
-
-            if (ticketsNeeded != 0)
                 wait++;
+            } else
+                list.offer(ticketsNeeded);
 
         }
         return wait;
