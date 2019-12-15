@@ -1,4 +1,4 @@
-package com.davemilligan.interview.hackerrank.arrays;
+package com.davemilligan.interview.hackerrank;
 
 import java.io.IOException;
 import java.util.ArrayList;
