@@ -19,7 +19,7 @@ public class Input {
         nioBufferedReader();
     }
 
-    private static void nioBufferedReader() throws IOException {
+    public static void nioBufferedReader() throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(Path.of(getUrl()), Charset.forName("US-ASCII"))) {
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -34,7 +34,7 @@ public class Input {
      *
      * @throws FileNotFoundException
      */
-    private static void nioReadLines() throws IOException {
+    public static void nioReadLines() throws IOException {
         Stream<String> stream = Files.lines(Path.of(getUrl()));
         stream.forEach(System.out::println);
     }
@@ -42,7 +42,7 @@ public class Input {
     /**
      * Read a file into a string.
      */
-    private static void nioReadAllBytes() throws IOException {
+    public static void nioReadAllBytes() throws IOException {
         System.out.println(new String(Files.readAllBytes(Path.of(getUrl()))));
     }
 
@@ -52,7 +52,7 @@ public class Input {
      *
      * @throws FileNotFoundException
      */
-    private static void readFromFileUsingScanner() throws FileNotFoundException {
+    public static void readFromFileUsingScanner() throws FileNotFoundException {
         Scanner sc = new Scanner(getFile());
         while (sc.hasNextLine())
             System.out.println(sc.nextLine());
@@ -64,29 +64,37 @@ public class Input {
      *
      * @throws FileNotFoundException
      */
-    private static void readLineByLineWithBufferedReader() throws IOException {
+    public static void readLineByLineWithBufferedReader() throws IOException {
         BufferedReader reader = new BufferedReader(getFileReader());
         try (Stream<String> stringStream = reader.lines()) {
             stringStream.forEach(System.out::println);
         }
     }
 
-    private static void readCharByChar() throws IOException {
+    public static void readCharByChar() throws IOException {
         FileReader fileReader = getFileReader();
         while(fileReader.ready()) {
             System.out.print((char)fileReader.read());
         }
     }
 
-    private static FileReader getFileReader() throws IOException {
+    public static FileReader getFileReader() throws IOException {
         return new FileReader(getFile());
     }
 
-    private static File getFile() {
+    public static File getFile() {
         return new File(getUrl());
     }
 
-    private static String getUrl() {
+    public static File getFile(String filename) {
+        return new File(getUrl(filename));
+    }
+
+    public static String getUrl() {
         return Thread.currentThread().getContextClassLoader().getResource("input.txt").getFile();
+    }
+
+    public static String getUrl(String filename) {
+        return Thread.currentThread().getContextClassLoader().getResource(filename).getFile();
     }
 }
