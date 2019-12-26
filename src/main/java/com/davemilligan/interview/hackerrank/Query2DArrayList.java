@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ArrayListQueries {
+/**
+ * Reads in a List of Lists of Integers.
+ * Then reads a number of queries to quey the lists.
+ */
+public class Query2DArrayList {
     public static void main(String[] args) {
         List<List<Integer>> lists = new ArrayList<>();
         try( Scanner scan = new Scanner(System.in)) {

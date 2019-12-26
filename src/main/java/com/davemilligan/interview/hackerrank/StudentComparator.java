@@ -4,6 +4,7 @@ import com.davemilligan.interview.io.Input;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 class StudentComparator implements Comparator<Student> {
 
@@ -25,47 +26,74 @@ class StudentComparator implements Comparator<Student> {
 
         //  Java 8
 //        Collections.sort(studentList,
-//              Comparator.comparing(Student::getCgpa).reversed().
-//                thenComparing(Student::getFname).
-//                thenComparing(Student::getId));
+//              Comparator.comparing(Student::getCGPA).reversed().
+//                thenComparing(Student::getName).
+//                thenComparing(Student::getID));
 
         Collections.sort(studentList, new StudentComparator());
         for(Student st: studentList){
-            System.out.printf("%d %s %s \n", st.getId(), st.getFname(), st.getCgpa());
+            System.out.printf("%d %s %s \n", st.getID(), st.getName(), st.getCGPA());
         }
     }
 
     @Override
     public int compare(Student s1, Student s2) {
-        if (s1.getCgpa() == s2.getCgpa()) {
-            if (s1.getFname().compareTo(s2.getFname()) == 0) {
-                return s1.getId() - s2.getId();
+        if (s1.getCGPA() == s2.getCGPA()) {
+            if (s1.getName().compareTo(s2.getName()) == 0) {
+                return s1.getID() - s2.getID();
             } else {
-                return s1.getFname().compareTo(s2.getFname());
+                return s1.getName().compareTo(s2.getName());
             }
-        } else if (s1.getCgpa() > s2.getCgpa()) {
+        } else if (s1.getCGPA() > s2.getCGPA()) {
             return -1;
         } else return 1;
     }
 }
 
+class Priorities {
+
+    PriorityQueue<Student> pQueue = new PriorityQueue<Student>(Comparator.comparing(Student::getCGPA).reversed().
+            thenComparing(Student::getName).
+            thenComparing(Student::getID));
+
+    public List<Student> getStudents(List<String> events) {
+        events.forEach(e -> {
+            String[] eles = e.split("\\s+");
+            String event = eles[0];
+            if (event.equals("SERVED"))
+                pQueue.poll();
+            else {
+                String name = eles[1];
+                double cgpa = Double.parseDouble(eles[2]);
+                int id = Integer.parseInt(eles[3]);
+                Student s = new Student(id, name, cgpa);
+                pQueue.add(s);
+            }
+        });
+        List<Student> list = new ArrayList<>();
+        while (!pQueue.isEmpty())
+            list.add(pQueue.poll());
+        return list;
+    }
+}
+
 class Student{
-    private int id;
-    private String fname;
-    private double cgpa;
-    public Student(int id, String fname, double cgpa) {
+    private int ID;
+    private String name;
+    private double CGPA;
+    public Student(int ID, String name, double CGPA) {
         super();
-        this.id = id;
-        this.fname = fname;
-        this.cgpa = cgpa;
+        this.ID = ID;
+        this.name = name;
+        this.CGPA = CGPA;
     }
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
-    public String getFname() {
-        return fname;
+    public String getName() {
+        return name;
     }
-    public double getCgpa() {
-        return cgpa;
+    public double getCGPA() {
+        return CGPA;
     }
 }

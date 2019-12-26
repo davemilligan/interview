@@ -9,15 +9,12 @@ public class BracketsMatching {
     public static void main(String []argh)
     {
         Scanner sc = new Scanner(System.in);
-        Map<String, String> isClosing = new HashMap<>();
-        isClosing.put("}", "{");
-        isClosing.put("]", "[");
-        isClosing.put(")", "(");
+        String closingPattern = "}])";
 
-        Map<String, String> openingmatch = new HashMap<>();
-        openingmatch.put("{", "}");
-        openingmatch.put("[", "]");
-        openingmatch.put("(", ")");
+        Map<String, String> openingPattern = new HashMap<>();
+        openingPattern.put("{", "}");
+        openingPattern.put("[", "]");
+        openingPattern.put("(", ")");
 
         while (sc.hasNext()) {
             String input=sc.next();
@@ -26,8 +23,8 @@ public class BracketsMatching {
             for(String s : input.split("")) {
                 //System.out.println("S:" + s);
                 if (!stack.empty() &&
-                        isClosing.containsKey(s) &&
-                        s.equals(openingmatch.get(stack.peek())))
+                        closingPattern.contains(s) &&
+                        s.equals(openingPattern.get(stack.peek())))
                     stack.pop();
                 else
                     stack.push(s);
