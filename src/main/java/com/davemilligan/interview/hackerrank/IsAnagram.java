@@ -1,6 +1,6 @@
 package com.davemilligan.interview.hackerrank;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class IsAnagram {
@@ -49,5 +49,68 @@ public class IsAnagram {
             bMap.put(c, (has != null) ? has + 1: 1);
         }
         return (aMap.equals(bMap));
+    }
+
+    static int sherlockAndAnagrams(String s) {
+        int count = 0;
+        int slen = s.length();
+        String reversed = new StringBuilder(s).reverse().toString();
+        Map<String, Integer> map1 = new HashMap<>();
+        //  Get a count of the occurrences of each substring.
+        for (int i = 0; i <= slen; i++) {
+            for (int j = i+1; j <= slen; j++) {
+                String ss = s.substring(i, j);
+                int currentCount = map1.getOrDefault(ss, 0);
+                map1.put(ss, ++currentCount);
+            }
+
+        }
+
+        for (int i = 0; i <= slen; i++) {
+            for (int j = i+1; j <= slen; j++) {
+                String ss = reversed.substring(i, j);
+                int existing = map1.getOrDefault(ss, 0);
+                if (existing > 0)
+                    existing--;
+                count += existing;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Count removals required to make anagram.
+     * @param a
+     * @param b
+     * @return
+     */
+    static int makeAnagram(String a, String b) {
+        final java.util.Map<String, Integer> aMap = new java.util.HashMap<>();
+        for (String c : a.split("")) {
+            aMap.put(c, aMap.getOrDefault(c, 0) + 1);
+        }
+        final java.util.Map<String, Integer> bMap = new java.util.HashMap<>();
+        for (String c : b.split("")) {
+            bMap.put(c, bMap.getOrDefault(c, 0) + 1);
+        }
+        return (aMap.equals(bMap) ? 0 : removeLetters(aMap, bMap));
+
+    }
+
+    static int removeLetters(Map<String,Integer> aMap, Map<String,Integer> bMap) {
+        int difference = countDifferences(aMap, bMap);
+        difference += countDifferences(bMap, aMap);
+        return difference;
+    }
+
+    static int countDifferences(Map<String,Integer> aMap, Map<String,Integer> bMap) {
+        int difference = 0;
+        for (String chr: aMap.keySet()) {
+            int count = aMap.get(chr);
+            int bMapCount = bMap.getOrDefault(chr, 0);
+            if (count > bMapCount)
+                difference += (count - bMapCount);
+        }
+        return difference;
     }
 }

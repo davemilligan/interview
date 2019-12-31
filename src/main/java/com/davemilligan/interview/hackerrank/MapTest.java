@@ -11,6 +11,27 @@ public class MapTest {
         weakHashMap();
     }
 
+    public static void checkMagazine(String[] magazine, String[] note) {
+        TreeMap<String, Integer> map = new TreeMap<>();
+        for( String s: magazine) {
+            Integer count = map.get(s);
+            if (count == null)
+                map.put(s,1);
+            else
+                map.put(s, count + 1);
+        }
+        for (String s: note) {
+            Integer count = map.get(s);
+            if (count == null || count == 0) {
+                System.out.println("No");
+                return;
+            } else {
+                map.put(s, count - 1);
+            }
+        }
+        System.out.println("Yes");
+    }
+
     /**
      * Lets GC if key is only reference to the value
      */
